@@ -1,0 +1,2527 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>球Volleyball-頭前混排(7-9pm)</title>
+  <meta name="theme-color" content="#0B0F17" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="頭前混排" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./icon-512.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #0B0F17;
+      --bg-card: #131B2E;
+      --bg-elevated: #1A243B;
+      --bg-elevated-hover: #222F4C;
+      --bg-input: #0F1626;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --border-color: #26334D;
+      --border-subtle: rgba(148, 163, 184, 0.14);
+
+      --primary: #F97316;
+      --primary-hover: #FB923C;
+      --primary-soft: rgba(249, 115, 22, 0.15);
+
+      --male-bg: rgba(56, 189, 248, 0.14);
+      --male-text: #38BDF8;
+      --male-border: rgba(56, 189, 248, 0.35);
+
+      --female-bg: rgba(244, 114, 182, 0.14);
+      --female-text: #F472B6;
+      --female-border: rgba(244, 114, 182, 0.35);
+
+      --green-bg: rgba(34, 197, 94, 0.16);
+      --green-text: #4ADE80;
+      --green-border: rgba(34, 197, 94, 0.45);
+      --green-solid: #22C55E;
+
+      --orange-bg: rgba(245, 158, 11, 0.18);
+      --orange-text: #FBBF24;
+      --orange-border: rgba(245, 158, 11, 0.55);
+      --orange-solid: #F59E0B;
+
+      --wait-bg: rgba(234, 179, 8, 0.15);
+      --wait-text: #FDE047;
+      --wait-border: rgba(234, 179, 8, 0.4);
+
+      --danger-bg: rgba(239, 68, 68, 0.15);
+      --danger-text: #F87171;
+      --danger-border: rgba(239, 68, 68, 0.4);
+
+      --cyan-bg: rgba(6, 182, 212, 0.16);
+      --cyan-text: #22D3EE;
+      --cyan-border: rgba(6, 182, 212, 0.45);
+
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 10px 28px -4px rgba(0, 0, 0, 0.55);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+      background-color: var(--bg-page);
+      background-image:
+        radial-gradient(circle at 12% 0%, rgba(249, 115, 22, 0.10), transparent 35%),
+        radial-gradient(circle at 88% 5%, rgba(56, 189, 248, 0.08), transparent 35%);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 64px;
+      min-height: 100vh;
+    }
+
+    /* Top Navigation Bar */
+    .topbar {
+      background: rgba(11, 15, 23, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 13px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    }
+    .topbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+      flex-shrink: 0;
+    }
+    .brand-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: #FFFFFF;
+    }
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .sheet-select {
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+      font-family: inherit;
+    }
+    .sheet-select:focus {
+      border-color: var(--primary);
+    }
+    .sheet-link-btn {
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.18s;
+      font-family: inherit;
+    }
+    .sheet-link-btn:hover {
+      background: var(--bg-elevated-hover);
+      border-color: #3B4D71;
+    }
+    .sheet-link-btn.sync-btn {
+      background: rgba(249, 115, 22, 0.14);
+      border-color: rgba(249, 115, 22, 0.45);
+      color: #FB923C;
+    }
+    .sheet-link-btn.sync-btn:hover {
+      background: rgba(249, 115, 22, 0.24);
+    }
+    .sheet-link-btn.org-btn {
+      background: rgba(148, 163, 184, 0.12);
+      border-color: var(--border-color);
+      color: var(--text-muted);
+    }
+    .sheet-link-btn.org-btn.unlocked {
+      background: var(--green-bg);
+      border-color: var(--green-border);
+      color: var(--green-text);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.25);
+    }
+    .sheet-link-btn.mode-btn.active {
+      background: var(--primary-soft);
+      border-color: rgba(249, 115, 22, 0.55);
+      color: var(--primary-hover);
+      box-shadow: 0 0 10px rgba(249, 115, 22, 0.18);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1120px;
+      margin: 18px auto 0;
+      padding: 0 14px;
+    }
+
+    /* Week Scroller Bar */
+    .week-selector-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      margin-bottom: 16px;
+    }
+    @media (max-width: 768px) {
+      .week-selector-card {
+        display: none;
+      }
+      .week-selector-card.mobile-open {
+        display: block;
+      }
+    }
+    .mobile-week-toggle-btn {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1.5px solid rgba(249, 115, 22, 0.45);
+      background: var(--primary-soft);
+      color: var(--primary-hover);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    @media (max-width: 768px) {
+      .mobile-week-toggle-btn {
+        display: inline-flex;
+      }
+    }
+    .week-selector-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .week-selector-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .week-quick-btns {
+      display: flex;
+      gap: 6px;
+    }
+    .btn-chip {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    .btn-chip:hover {
+      border-color: var(--primary);
+      color: var(--primary-hover);
+    }
+    .btn-chip.primary {
+      background: var(--primary-soft);
+      border-color: rgba(249, 115, 22, 0.45);
+      color: var(--primary-hover);
+    }
+
+    .week-pills-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: #334155 transparent;
+    }
+    .week-pills-scroll::-webkit-scrollbar {
+      height: 5px;
+    }
+    .week-pills-scroll::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 999px;
+    }
+    .week-pill {
+      flex: 0 0 auto;
+      min-width: 88px;
+      padding: 8px 10px;
+      border-radius: 11px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-elevated);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+      position: relative;
+      color: var(--text-main);
+    }
+    .week-pill:hover {
+      border-color: #475569;
+      background: var(--bg-elevated-hover);
+    }
+    .week-pill.active {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.22) 0%, rgba(234, 88, 12, 0.12) 100%);
+      border-color: var(--primary);
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.22);
+    }
+    .week-pill.next-up::after {
+      content: '本週';
+      position: absolute;
+      top: -7px;
+      right: 6px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 99px;
+    }
+    .week-pill-date {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .week-pill.active .week-pill-date {
+      color: #FFEDD5;
+    }
+    .week-pill-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      font-weight: 600;
+    }
+    .week-pill.suspended {
+      opacity: 0.5;
+      background: #0F1522;
+    }
+
+    /* Hero Summary Banner */
+    .hero-banner {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .hero-banner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hero-date-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .hero-date-title {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .badge-open {
+      background: var(--green-bg);
+      color: var(--green-text);
+      border: 1px solid var(--green-border);
+    }
+    .badge-full {
+      background: var(--wait-bg);
+      color: var(--wait-text);
+      border: 1px solid var(--wait-border);
+    }
+    .badge-suspend {
+      background: var(--danger-bg);
+      color: var(--danger-text);
+      border: 1px solid var(--danger-border);
+    }
+
+    /* Organizer AC Toggle Button */
+    .ac-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.18s;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      font-family: inherit;
+    }
+    .ac-toggle-btn:hover:not(:disabled) {
+      border-color: var(--cyan-text);
+      color: var(--cyan-text);
+    }
+    .ac-toggle-btn.active {
+      background: var(--cyan-bg);
+      color: var(--cyan-text);
+      border-color: var(--cyan-border);
+      box-shadow: 0 0 14px rgba(34, 211, 238, 0.18);
+    }
+    .ac-toggle-btn:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    .hero-rate-info {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 2px;
+    }
+    .hero-rate-info strong {
+      color: var(--text-main);
+    }
+
+    /* Orange AC Reminder Bar */
+    .ac-orange-alert {
+      margin-top: 6px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: var(--orange-bg);
+      border: 1px solid var(--orange-border);
+      color: var(--orange-text);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Stats Boxes */
+    .hero-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    @media (max-width: 480px) {
+      .hero-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .stat-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 10px 8px;
+      text-align: center;
+    }
+    .stat-box.highlight {
+      background: var(--primary-soft);
+      border-color: rgba(249, 115, 22, 0.4);
+    }
+    .stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .stat-value {
+      font-size: 20px;
+      font-weight: 900;
+      margin-top: 2px;
+      color: var(--text-main);
+    }
+    .stat-sub {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* Two-Column Content Layout */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .section-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      margin-bottom: 16px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #FFFFFF;
+    }
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Regular Members Grid */
+    .gender-group-label {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 10px 0 8px;
+    }
+    .gender-group-label.male {
+      background: var(--male-bg);
+      color: var(--male-text);
+      border: 1px solid var(--male-border);
+    }
+    .gender-group-label.female {
+      background: var(--female-bg);
+      color: var(--female-text);
+      border: 1px solid var(--female-border);
+    }
+
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+      gap: 8px;
+    }
+    @media (max-width: 520px) {
+      .members-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .member-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: 11px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-elevated);
+      transition: all 0.15s;
+      gap: 6px;
+    }
+    .member-item.attending.paid {
+      background: rgba(34, 197, 94, 0.10);
+      border-color: rgba(34, 197, 94, 0.45);
+    }
+    .member-item.attending.owes_ac {
+      background: rgba(245, 158, 11, 0.14);
+      border-color: rgba(245, 158, 11, 0.55);
+    }
+    .member-item.attending.unpaid {
+      background: var(--bg-elevated);
+      border-color: #3B4D71;
+    }
+    .member-item.leave {
+      background: rgba(15, 23, 42, 0.55);
+      border-color: rgba(100, 116, 139, 0.25);
+      opacity: 0.55;
+    }
+
+    .member-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    /* Avatar Component */
+    .avatar-wrap {
+      position: relative;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-main);
+      transition: transform 0.15s, border-color 0.15s;
+      overflow: visible;
+    }
+    .avatar-wrap.male {
+      border-color: var(--male-border);
+      background: var(--male-bg);
+      color: var(--male-text);
+    }
+    .avatar-wrap.female {
+      border-color: var(--female-border);
+      background: var(--female-bg);
+      color: var(--female-text);
+    }
+    .avatar-wrap:hover {
+      transform: scale(1.07);
+      border-color: var(--primary);
+    }
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+    .avatar-cam-badge {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      font-size: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .member-name {
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text-main);
+    }
+    .member-item.leave .member-name {
+      text-decoration: line-through;
+      color: var(--text-dim);
+    }
+
+    .member-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Pay Status Dot Button (Green / Orange / White) */
+    .pay-dot-btn {
+      border: 1px solid transparent;
+      border-radius: 7px;
+      padding: 3px 6px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s;
+      line-height: 1.2;
+      font-family: inherit;
+    }
+    .pay-dot-btn.paid {
+      background: var(--green-bg);
+      color: var(--green-text);
+      border-color: var(--green-border);
+    }
+    .pay-dot-btn.owes_ac {
+      background: var(--orange-bg);
+      color: var(--orange-text);
+      border-color: var(--orange-border);
+      animation: pulseOrange 2s infinite;
+    }
+    .pay-dot-btn.unpaid {
+      background: rgba(148, 163, 184, 0.12);
+      color: var(--text-muted);
+      border-color: rgba(148, 163, 184, 0.25);
+    }
+    .pay-dot-btn:disabled {
+      opacity: 0.65;
+      cursor: wait;
+      animation: none;
+    }
+    @keyframes pulseOrange {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.35); }
+      50% { box-shadow: 0 0 0 4px rgba(245, 158, 11, 0); }
+    }
+
+    .member-toggle-btn {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 7px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    .member-item.attending .member-toggle-btn:hover:not(:disabled) {
+      background: var(--danger-bg);
+      color: var(--danger-text);
+      border-color: var(--danger-border);
+    }
+    .member-item.leave .member-toggle-btn {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .member-toggle-btn:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    /* Drop-in Sign-up Form */
+    .signup-form {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr 0.8fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    @media (max-width: 480px) {
+      .form-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      .form-group.full-mobile {
+        grid-column: 1 / -1;
+      }
+    }
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    /* 16px prevents iOS Safari / LINE WebView auto-zoom on focus */
+    .form-input, .form-select {
+      width: 100%;
+      padding: 9px 11px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-color);
+      font-size: 16px;
+      font-weight: 600;
+      background: var(--bg-input);
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.15s;
+      font-family: inherit;
+    }
+    .form-input::placeholder {
+      color: var(--text-dim);
+    }
+    .form-input:focus, .form-select:focus {
+      border-color: var(--primary);
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 11px 16px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    .submit-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #FB923C 0%, #F97316 100%);
+    }
+    .submit-btn.waitlist-mode {
+      background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+    }
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Drop-in List Items */
+    .dropin-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .dropin-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-elevated);
+      gap: 8px;
+    }
+    .dropin-card.paid {
+      background: rgba(34, 197, 94, 0.11);
+      border-color: rgba(34, 197, 94, 0.45);
+    }
+    .dropin-card.waitlist {
+      background: rgba(234, 179, 8, 0.11);
+      border-color: rgba(234, 179, 8, 0.4);
+    }
+    .dropin-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .dropin-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .dropin-fee-tag {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+    .dropin-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    /* Green Light Toggle Button */
+    .pay-lamp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    .pay-lamp-btn.paid {
+      background: var(--green-solid);
+      border-color: #16A34A;
+      color: #052E16;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.35);
+    }
+    .pay-lamp-btn:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+    .lamp-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #64748B;
+    }
+    .pay-lamp-btn.paid .lamp-dot {
+      background: #052E16;
+      box-shadow: 0 0 6px #fff;
+    }
+
+    .icon-del-btn {
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .icon-del-btn:hover:not(:disabled) {
+      background: var(--danger-bg);
+      color: var(--danger-text);
+      border-color: var(--danger-border);
+    }
+    .icon-del-btn:disabled {
+      opacity: 0.5;
+      cursor: wait;
+    }
+
+    /* Quarterly Fee Management View */
+    .quarter-selector {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 600px) {
+      .quarter-selector {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .quarter-tab-btn {
+      padding: 12px 10px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-main);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    .quarter-tab-btn:hover {
+      background: var(--bg-elevated);
+    }
+    .quarter-tab-btn.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+    }
+    .quarter-tab-title {
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .quarter-tab-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .fee-table-wrap {
+      overflow-x: auto;
+    }
+    .fee-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .fee-table th {
+      text-align: left;
+      padding: 10px 12px;
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      font-weight: 800;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+    .fee-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: middle;
+      color: var(--text-main);
+    }
+    .fee-table tr.paid-row {
+      background: rgba(34, 197, 94, 0.07);
+    }
+    .fee-table tr.orange-row {
+      background: rgba(245, 158, 11, 0.09);
+    }
+
+    /* Toast & Loading */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1E293B;
+      color: #F8FAFC;
+      border: 1px solid #334155;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      z-index: 400;
+      transition: transform 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 92vw;
+      text-align: center;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .loading-mask {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 15, 23, 0.78);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 350;
+    }
+    .loading-mask.show {
+      display: flex;
+    }
+    .spinner-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 18px 26px;
+      border-radius: 14px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--border-color);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .empty-hint {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      border: 1px dashed var(--border-color);
+    }
+
+    /* Avatar Upload Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 500;
+      padding: 16px;
+    }
+    .modal-backdrop.show {
+      display: flex;
+    }
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+    .modal-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+    .modal-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .avatar-preview-box {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      border: 2.5px solid var(--primary);
+      background: var(--bg-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--text-main);
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+    .avatar-preview-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .modal-btn-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .modal-btn {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      font-family: inherit;
+    }
+    .modal-btn.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .modal-btn.danger {
+      background: var(--danger-bg);
+      border-color: var(--danger-border);
+      color: var(--danger-text);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-icon">🏐</div>
+        <div>
+          <div class="brand-title" id="brandTitle">頭前混排, 週二7-9pm</div>
+          <div class="brand-sub" id="brandSub">點擊隊員圓形頭像可上傳照片・單欄極速同步 Google Sheet</div>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <select id="sheetSelector" class="sheet-select" onchange="onSwitchSheet(this.value)" title="切換年度或分頁"></select>
+        <button class="sheet-link-btn mode-btn active" id="tabBtnWeekly" onclick="switchMode('weekly')">🏐 打球名單</button>
+        <button class="sheet-link-btn mode-btn" id="tabBtnQuarterly" onclick="switchMode('quarterly')">💰 季打收費統計</button>
+        <button class="sheet-link-btn org-btn" id="orgModeBtn" onclick="toggleOrganizerMode()" title="防手機滑動誤觸鎖：主揪要登記收錢或開冷氣時點此解鎖">
+          🔒 主揪收費：關
+        </button>
+        <button class="sheet-link-btn sync-btn" id="syncBtn" onclick="refreshData(true)">🔄 同步最新名單</button>
+        <a class="sheet-link-btn" href="https://docs.google.com/spreadsheets/d/10NeLLPAyJ_S9XCyO3Uzt_nyD5D_5Xiw6DOMGyYsB7jU/edit?gid=1697325288#gid=1697325288" target="_blank" rel="noopener">
+          📊 打開 Google Sheet
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- VIEW 1: WEEKLY ROSTER & SIGNUP -->
+    <div id="viewWeekly">
+      <!-- Week Selector (Visible on Desktop; Hidden on Mobile until '📅 換週' is clicked) -->
+      <div class="week-selector-card" id="weekSelectorCard">
+        <div class="week-selector-header">
+          <div class="week-selector-title">🗓️ 選擇打球日期（每週二）</div>
+          <div class="week-quick-btns" style="flex-wrap: wrap;">
+            <button class="btn-chip" id="wqBtn1" onclick="filterWeeklyQuarter(1)">Q1 (1-3月)</button>
+            <button class="btn-chip" id="wqBtn2" onclick="filterWeeklyQuarter(2)">Q2 (4-6月)</button>
+            <button class="btn-chip" id="wqBtn3" onclick="filterWeeklyQuarter(3)">Q3 (7-9月)</button>
+            <button class="btn-chip" id="wqBtn4" onclick="filterWeeklyQuarter(4)">Q4 (10-12月)</button>
+            <button class="btn-chip" id="wqBtn0" onclick="filterWeeklyQuarter(0)">全年</button>
+            <button class="btn-chip primary" onclick="jumpToUpcomingWeek()">⚡ 跳至下一場</button>
+          </div>
+        </div>
+        <div class="week-pills-scroll" id="weekPillsContainer"></div>
+      </div>
+
+      <!-- Hero Banner -->
+      <div class="hero-banner" id="heroBanner"></div>
+
+      <!-- Main 2-Column Grid -->
+      <div class="main-grid">
+        <!-- Left Column: Regular Members -->
+        <div class="section-card">
+          <div class="section-header">
+            <div>
+              <div class="section-title">👕 固定季打名單 <span id="regularSummaryBadge" style="font-size:13px;color:var(--primary);font-weight:800;"></span></div>
+              <div class="section-subtitle">點頭像可上傳個人照片・收費燈號需先開啟上方「🔓 主揪收費」才可切換</div>
+            </div>
+          </div>
+
+          <div class="gender-group-label male">♂ 男生季打</div>
+          <div class="members-grid" id="maleRegularGrid"></div>
+
+          <div class="gender-group-label female" style="margin-top:16px;">♀ 女生季打</div>
+          <div class="members-grid" id="femaleRegularGrid"></div>
+        </div>
+
+        <!-- Right Column: Drop-in Signup & Fee Lamp -->
+        <div>
+          <div class="section-card">
+            <div class="section-header">
+              <div>
+                <div class="section-title">🙋‍♂️ 零打 / 候補報名</div>
+                <div class="section-subtitle" id="signupRuleHint">滿額前直接正取，超過上限自動排入候補</div>
+              </div>
+            </div>
+
+            <!-- Sign-up Form -->
+            <form class="signup-form" id="signupForm" onsubmit="handleAddDropIn(event)">
+              <div class="form-row">
+                <div class="form-group full-mobile">
+                  <label class="form-label">報名稱呼 / 誰的朋友</label>
+                  <input type="text" id="inputDropInName" class="form-input" placeholder="例如：小杰 或 卡比友" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">性別</label>
+                  <select id="inputDropInGender" class="form-select">
+                    <option value="F">女生 (女)</option>
+                    <option value="M">男生 (男)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">人數</label>
+                  <select id="inputDropInCount" class="form-select">
+                    <option value="1">+1 人</option>
+                    <option value="2">+2 人</option>
+                    <option value="3">+3 人</option>
+                    <option value="4">+4 人</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="submit-btn" id="submitDropInBtn">
+                ➕ 立即報名寫入 Google Sheet
+              </button>
+            </form>
+
+            <!-- Confirmed Drop-in List -->
+            <div class="section-header" style="margin-top: 8px;">
+              <div class="section-title" style="font-size:14px;">✅ 本週正取零打名單</div>
+              <div class="section-subtitle">收到錢點一下亮綠燈 🟢（同步反綠）</div>
+            </div>
+            <div class="dropin-list" id="confirmedDropInList"></div>
+
+            <!-- Waitlist -->
+            <div id="waitlistSection" style="display:none; margin-top: 18px;">
+              <div class="section-header">
+                <div class="section-title" style="font-size:14px; color:var(--wait-text);">⏳ 候補名單（有人請假自動遞補）</div>
+              </div>
+              <div class="dropin-list" id="waitlistContainer"></div>
+            </div>
+
+            <!-- Memos (from sheet like 宥君160未收) -->
+            <div id="memoSection" style="display:none; margin-top: 18px;">
+              <div class="section-header">
+                <div class="section-title" style="font-size:14px; color:var(--text-muted);">📝 表單收費備註</div>
+              </div>
+              <div class="dropin-list" id="memoContainer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: QUARTERLY FEE MANAGEMENT -->
+    <div id="viewQuarterly" style="display:none;">
+      <div class="quarter-selector" id="quarterTabsContainer"></div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <div>
+            <div class="section-title" id="quarterTitle">💰 季打收費統計表</div>
+            <div class="section-subtitle" id="quarterSubHint">季初預收無冷氣季費（整季反綠）；若當週開冷氣會變橘色提醒補收差額</div>
+          </div>
+        </div>
+        <div class="fee-table-wrap">
+          <table class="fee-table">
+            <thead>
+              <tr>
+                <th>季打隊員</th>
+                <th>性別</th>
+                <th>出席場次 (含開冷氣)</th>
+                <th>季初基本費</th>
+                <th>待補冷氣費 (橘燈)</th>
+                <th>試算表繳費進度</th>
+                <th>整季收費開關 (同步Sheet)</th>
+              </tr>
+            </thead>
+            <tbody id="quarterFeeTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Avatar Upload Modal -->
+  <div class="modal-backdrop" id="avatarModalBackdrop" onclick="if(event.target===this) closeAvatarModal()">
+    <div class="modal-card">
+      <div class="modal-title" id="avatarModalTitle">更換個人大頭貼</div>
+      <div class="modal-sub">照片會自動裁切壓縮為圓形頭像，並儲存於試算表『頭像設定』分頁</div>
+      <div class="avatar-preview-box" id="avatarModalPreview"></div>
+      <input type="file" id="avatarFileInput" accept="image/*" style="display:none" onchange="handleAvatarFileChange(event)" />
+      <button class="submit-btn" type="button" onclick="document.getElementById('avatarFileInput').click()">
+        📷 選擇手機 / 電腦照片
+      </button>
+      <div class="modal-btn-row">
+        <button class="modal-btn" type="button" onclick="closeAvatarModal()">取消</button>
+        <button class="modal-btn danger" type="button" id="avatarRemoveBtn" onclick="saveAvatarToBackend('')" style="display:none;">移除頭像</button>
+        <button class="modal-btn primary" type="button" id="avatarSaveBtn" onclick="saveAvatarToBackend(PENDING_AVATAR_DATA_URL)" disabled>💾 儲存頭像</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAS API URL Setup Modal (Shown on GitHub Pages if GAS_API_URL is not yet hardcoded) -->
+  <div class="modal-backdrop" id="apiConfigModalBackdrop">
+    <div class="modal-card" style="max-width: 440px;">
+      <div class="modal-title">🔗 綁定 Google Apps Script API 網址</div>
+      <div class="modal-sub" style="text-align:left; line-height:1.6;">
+        請貼上你在 Google Sheet「擴充功能 &gt; Apps Script &gt; 部署 &gt; 管理部署作業」取得的<strong>網頁應用程式網址（以 <code>/exec</code> 結尾）</strong>：<br/>
+        <span style="color:var(--primary-hover); font-size:11px;">💡 提示：你也可以直接把這個網址貼進 <code>index.html</code> 裡的 <code>GAS_API_URL</code> 變數，這樣球友打開就完全不用輸入！</span>
+      </div>
+      <input type="url" id="gasApiUrlInput" class="form-input" placeholder="https://script.google.com/macros/s/.../exec" style="margin-bottom: 12px; font-size: 13px;" />
+      <div class="modal-btn-row">
+        <button class="modal-btn primary" type="button" onclick="saveGasApiUrlFromModal()">💾 儲存並連線</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full-Sheet Sync Loading Mask -->
+  <div class="loading-mask" id="loadingMask">
+    <div class="spinner-card">
+      <div class="spinner"></div>
+      <span id="loadingText">正在掃描 Google Sheet...</span>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toastMsg"></div>
+
+  <script>
+    // ============================================================================
+    // 📌 【GitHub Pages 必填設定】
+    // 請將下方引號內的文字，替換成你部署 GAS 取得的「網頁應用程式網址 (https://script.google.com/macros/s/.../exec)」
+    // ============================================================================
+    const GAS_API_URL = 'PASTE_YOUR_GAS_EXEC_URL_HERE';
+
+    let APP_DATA = null;
+    let CURRENT_SHEET_NAME = '';
+    let SELECTED_COL_INDEX = null;
+    let SELECTED_QUARTER = 1;
+    let CURRENT_MODE = 'weekly';
+
+    // Organizer Fee Mode Lock (Default false on load so mobile scrolling never accidentally toggles fees or AC)
+    let ORGANIZER_MODE = false;
+
+    // Track in-flight buttons so we never show false-positive green lights before backend confirms
+    const PENDING_KEYS = new Set();
+
+    // Avatar Modal State
+    let AVATAR_TARGET_MEMBER = null;
+    let PENDING_AVATAR_DATA_URL = '';
+
+    // Warn user if they try to close tab while a write is still in flight
+    window.addEventListener('beforeunload', function(e) {
+      if (PENDING_KEYS.size > 0) {
+        e.preventDefault();
+        e.returnValue = '還有資料正在寫入 Google Sheet，確定要離開嗎？';
+        return e.returnValue;
+      }
+    });
+
+    function escJsStr(str) {
+      return String(str || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    }
+
+    function toggleOrganizerMode() {
+      ORGANIZER_MODE = !ORGANIZER_MODE;
+      const btn = document.getElementById('orgModeBtn');
+      if (btn) {
+        btn.classList.toggle('unlocked', ORGANIZER_MODE);
+        btn.textContent = ORGANIZER_MODE ? '🔓 主揪收費：開啟中' : '🔒 主揪收費：關';
+      }
+      showToast(ORGANIZER_MODE
+        ? '🔓 已開啟「主揪收費模式」！現在可直接點選綠燈/橘燈與冷氣開關'
+        : '🔒 已鎖定收費燈號（防手機滑動誤觸）');
+    }
+
+    function requireOrganizerMode() {
+      if (!ORGANIZER_MODE) {
+        showToast('🔒 防誤觸保護中：若您是主揪要記帳或開冷氣，請先點上方「🔒 主揪收費：關」解鎖！');
+        return false;
+      }
+      return true;
+    }
+
+    /**
+     * 解析目前要使用的 GAS doPost API 網址：
+     * 優先順序：
+     * 1. 程式碼上方寫死的 GAS_API_URL（只要開頭是 https://script.google.com/）
+     * 2. 網址參數 ?api=https://script.google.com/.../exec（並自動記住於 localStorage）
+     * 3. 瀏覽器 localStorage 儲存過的網址
+     */
+    function resolveExternalGasUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const queryApi = (params.get('api') || '').trim();
+      if (queryApi && queryApi.startsWith('https://script.google.com/')) {
+        try { localStorage.setItem('VOLLEYBALL_GAS_API_URL', queryApi); } catch (e) {}
+        return queryApi;
+      }
+      if (GAS_API_URL && GAS_API_URL.startsWith('https://script.google.com/')) {
+        return GAS_API_URL.trim();
+      }
+      try {
+        const saved = (localStorage.getItem('VOLLEYBALL_GAS_API_URL') || '').trim();
+        if (saved && saved.startsWith('https://script.google.com/')) {
+          return saved;
+        }
+      } catch (e) {}
+      return '';
+    }
+
+    function saveGasApiUrlFromModal() {
+      const input = document.getElementById('gasApiUrlInput');
+      const val = (input.value || '').trim();
+      if (!val.startsWith('https://script.google.com/') || !val.includes('/exec')) {
+        alert('請輸入正確的 GAS 網頁應用程式網址（開頭為 https://script.google.com/ 且結尾為 /exec）');
+        return;
+      }
+      try { localStorage.setItem('VOLLEYBALL_GAS_API_URL', val); } catch (e) {}
+      document.getElementById('apiConfigModalBackdrop').classList.remove('show');
+      refreshData(true);
+    }
+
+    /**
+     * 前後端分離 Unified API Caller：
+     * 1. 若在舊版 GAS Web App (iframe) 內開啟：自動相容使用 `google.script.run`（確保舊版無縫接軌）。
+     * 2. 若在 GitHub Pages 等外部網站開啟：使用原生 `fetch(url, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, redirect: 'follow' })`
+     *    呼叫 GAS 的 `doPost(e)`，徹底避開 CORS Preflight 錯誤！
+     * 3. 若在本地預覽伺服器開啟：同樣透過 `fetch` POST `text/plain` 呼叫 `/exec` 端點。
+     */
+    async function callBackend(methodName, payload) {
+      // 1. 舊版 GAS 內部 iframe 無縫相容
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        return new Promise((resolve, reject) => {
+          google.script.run
+            .withSuccessHandler(resolve)
+            .withFailureHandler(err => reject(new Error(err.message || String(err))))[methodName](payload);
+        });
+      }
+
+      // 2. 決定目標 POST URL（外部 GAS /exec 網址 或 本地預覽伺服器 /exec）
+      const extUrl = resolveExternalGasUrl();
+      const isLocalPreview = (
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname.endsWith('.googlers.com')
+      );
+
+      let targetUrl = extUrl;
+      if (!targetUrl) {
+        if (isLocalPreview) {
+          targetUrl = '/exec';
+        } else {
+          hideLoading();
+          document.getElementById('apiConfigModalBackdrop').classList.add('show');
+          throw new Error('請先設定 Google Apps Script 網頁應用程式網址 (/exec)');
+        }
+      }
+
+      // 3. 關鍵：使用 Content-Type: text/plain 搭配 redirect: "follow"，避免觸發 OPTIONS Preflight 導致 GAS CORS 報錯
+      const response = await fetch(targetUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify({
+          action: methodName,
+          payload: payload || {}
+        }),
+        redirect: 'follow'
+      });
+
+      const resJson = await response.json();
+      if (!response.ok || resJson.ok === false || resJson.error) {
+        throw new Error(resJson.error || '伺服器處理失敗');
+      }
+      // 相容 GAS doPost 回傳的 { ok: true, data: ... } 格式
+      return (resJson.data !== undefined) ? resJson.data : resJson;
+    }
+
+    function showLoading(text) {
+      document.getElementById('loadingText').textContent = text || '正在同步 Google Sheet...';
+      document.getElementById('loadingMask').classList.add('show');
+    }
+
+    function hideLoading() {
+      document.getElementById('loadingMask').classList.remove('show');
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const el = document.getElementById('toastMsg');
+      el.textContent = msg;
+      el.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 3100);
+    }
+
+    /**
+     * Client-side Quarter Computation:
+     * Recomputes Q1~Q4 statistics from `APP_DATA.weeks` in < 1ms so single-column mutations
+     * never need the backend to rescan all 52 columns!
+     */
+    function recomputeQuarters() {
+      if (!APP_DATA || !APP_DATA.weeks || !APP_DATA.members) return;
+      const rates = APP_DATA.rates;
+      const members = APP_DATA.members;
+      const weeks = APP_DATA.weeks;
+      const quarters = [];
+
+      for (let q = 1; q <= 4; q++) {
+        const qWeeks = weeks.filter(w => w.quarter === q && !w.isSuspended);
+        const startM = (q - 1) * 3 + 1;
+        const endM = q * 3;
+
+        const memberSummaries = members.map(m => {
+          let attendedCount = 0;
+          let acAttendedCount = 0;
+          let totalBaseFee = 0;
+          let totalFeeWithAC = 0;
+          let paidGreenCount = 0;
+          let orangeACCount = 0;
+          let unpaidWhiteCount = 0;
+
+          qWeeks.forEach(w => {
+            const rec = w.regularAttendance.find(r => r.rowIndex === m.rowIndex);
+            if (rec && rec.status > 0) {
+              attendedCount += rec.status;
+              totalBaseFee += rec.status * rates.regularNoAC;
+              if (w.hasAC) {
+                acAttendedCount += rec.status;
+                totalFeeWithAC += rec.status * rates.regularAC;
+              } else {
+                totalFeeWithAC += rec.status * rates.regularNoAC;
+              }
+              if (rec.payState === 'paid') paidGreenCount++;
+              else if (rec.payState === 'owes_ac') orangeACCount++;
+              else unpaidWhiteCount++;
+            }
+          });
+
+          const totalActiveCells = paidGreenCount + orangeACCount + unpaidWhiteCount;
+          const isQuarterBasePaid = totalActiveCells > 0 && unpaidWhiteCount === 0;
+          const isFullySettled = totalActiveCells > 0 && unpaidWhiteCount === 0 && orangeACCount === 0;
+
+          return {
+            rowIndex: m.rowIndex,
+            name: m.name,
+            gender: m.gender,
+            attendedCount: attendedCount,
+            acAttendedCount: acAttendedCount,
+            totalBaseFee: Math.round(totalBaseFee),
+            totalFeeWithAC: Math.round(totalFeeWithAC),
+            owedACFee: Math.round(orangeACCount * rates.acSurcharge),
+            paidGreenCount: paidGreenCount,
+            orangeACCount: orangeACCount,
+            unpaidWhiteCount: unpaidWhiteCount,
+            totalActiveCells: totalActiveCells,
+            isQuarterBasePaid: isQuarterBasePaid,
+            isFullySettled: isFullySettled,
+          };
+        });
+
+        quarters.push({
+          quarter: q,
+          label: 'Q' + q + ' (' + startM + '~' + endM + '月)',
+          weekCount: qWeeks.length,
+          members: memberSummaries,
+        });
+      }
+
+      APP_DATA.quarters = quarters;
+    }
+
+    /**
+     * Apply a single updatedWeek object returned by fast single-column backend functions
+     */
+    function applySingleWeekUpdate(updatedWeek) {
+      if (!APP_DATA || !updatedWeek) return;
+      const idx = APP_DATA.weeks.findIndex(w => w.colIndex === updatedWeek.colIndex);
+      if (idx !== -1) {
+        APP_DATA.weeks[idx] = updatedWeek;
+      }
+      recomputeQuarters();
+      renderAll();
+    }
+
+    /**
+     * Apply updatedQuarterMember returned by toggleQuarterPaid
+     */
+    function applyQuarterMemberUpdate(uqm) {
+      if (!APP_DATA || !uqm) return;
+      const targetPayState = uqm.isPaid ? 'paid' : 'unpaid';
+      APP_DATA.weeks.forEach(w => {
+        if (w.quarter === uqm.quarter) {
+          const rec = w.regularAttendance.find(r => r.rowIndex === uqm.rowIndex);
+          if (rec && rec.status > 0) {
+            rec.payState = targetPayState;
+            rec.isPaidCell = (targetPayState === 'paid');
+            rec.isOrangeCell = false;
+          }
+          w.stats.orangeACCount = w.regularAttendance.filter(r => r.status > 0 && r.payState === 'owes_ac').length;
+        }
+      });
+      recomputeQuarters();
+      renderAll();
+    }
+
+    function findUpcomingWeekColIndex(weeks) {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      const todayIso = `${yyyy}-${mm}-${dd}`;
+
+      for (const w of weeks) {
+        if (!w.isSuspended && w.isoDate >= todayIso) {
+          return w.colIndex;
+        }
+      }
+      const curVal = (today.getMonth() + 1) * 100 + today.getDate();
+      for (const w of weeks) {
+        if (!w.isSuspended && (w.month * 100 + w.day) >= curVal) {
+          return w.colIndex;
+        }
+      }
+      return weeks.length ? weeks[0].colIndex : null;
+    }
+
+    let WEEKLY_QUARTER_FILTER = 0; // 0 = 全年, 1~4 = Q1~Q4
+
+    function filterWeeklyQuarter(q) {
+      if (!APP_DATA) return;
+      WEEKLY_QUARTER_FILTER = q;
+      if (q >= 1 && q <= 4) {
+        SELECTED_QUARTER = q;
+        const qWeeks = APP_DATA.weeks.filter(w => w.quarter === q);
+        if (qWeeks.length > 0 && !qWeeks.some(w => w.colIndex === SELECTED_COL_INDEX)) {
+          const upcomingCol = findUpcomingWeekColIndex(APP_DATA.weeks);
+          const hasUpcomingInQ = qWeeks.find(w => w.colIndex === upcomingCol);
+          const firstOpen = qWeeks.find(w => !w.isSuspended) || qWeeks[0];
+          SELECTED_COL_INDEX = hasUpcomingInQ ? hasUpcomingInQ.colIndex : firstOpen.colIndex;
+        }
+      }
+      renderAll();
+      scrollActiveWeekIntoView();
+    }
+
+    async function refreshData(isManual) {
+      try {
+        showLoading(isManual ? '正在重新掃描整張 Google Sheet...' : '正在載入球團名單...');
+        const data = await callBackend('getSheetData', { sheetName: CURRENT_SHEET_NAME });
+        APP_DATA = data;
+        APP_DATA.avatars = APP_DATA.avatars || {};
+        CURRENT_SHEET_NAME = data.sheetTitle;
+        recomputeQuarters();
+
+        if (!SELECTED_COL_INDEX || !APP_DATA.weeks.some(w => w.colIndex === SELECTED_COL_INDEX)) {
+          SELECTED_COL_INDEX = findUpcomingWeekColIndex(APP_DATA.weeks);
+          const curWeek = APP_DATA.weeks.find(w => w.colIndex === SELECTED_COL_INDEX);
+          if (curWeek) {
+            SELECTED_QUARTER = curWeek.quarter;
+            WEEKLY_QUARTER_FILTER = curWeek.quarter;
+          }
+        }
+        renderAll();
+        if (isManual) showToast('✅ 已完整掃描並同步最新 Google Sheet 名單！');
+      } catch (err) {
+        alert('讀取失敗：' + err.message);
+      } finally {
+        hideLoading();
+      }
+    }
+
+    async function onSwitchSheet(sheetName) {
+      CURRENT_SHEET_NAME = sheetName;
+      SELECTED_COL_INDEX = null;
+      await refreshData(true);
+    }
+
+    function switchMode(mode) {
+      CURRENT_MODE = mode;
+      document.getElementById('tabBtnWeekly').classList.toggle('active', mode === 'weekly');
+      document.getElementById('tabBtnQuarterly').classList.toggle('active', mode === 'quarterly');
+      document.getElementById('viewWeekly').style.display = mode === 'weekly' ? 'block' : 'none';
+      document.getElementById('viewQuarterly').style.display = mode === 'quarterly' ? 'block' : 'none';
+      renderAll();
+    }
+
+    function jumpToUpcomingWeek() {
+      if (!APP_DATA) return;
+      SELECTED_COL_INDEX = findUpcomingWeekColIndex(APP_DATA.weeks);
+      const curWeek = APP_DATA.weeks.find(w => w.colIndex === SELECTED_COL_INDEX);
+      if (curWeek) {
+        SELECTED_QUARTER = curWeek.quarter;
+        WEEKLY_QUARTER_FILTER = curWeek.quarter;
+      }
+      if (MOBILE_WEEK_OPEN) {
+        MOBILE_WEEK_OPEN = false;
+        const card = document.getElementById('weekSelectorCard');
+        if (card) card.classList.remove('mobile-open');
+      }
+      renderAll();
+      scrollActiveWeekIntoView();
+    }
+
+    function scrollActiveWeekIntoView() {
+      setTimeout(() => {
+        const activeEl = document.querySelector('.week-pill.active');
+        if (activeEl) {
+          activeEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }, 60);
+    }
+
+    function renderAvatarHtml(memberName, gender) {
+      const url = (APP_DATA && APP_DATA.avatars && APP_DATA.avatars[memberName]) ? APP_DATA.avatars[memberName] : '';
+      const gClass = gender === 'M' ? 'male' : 'female';
+      const initial = memberName ? memberName.slice(0, 1) : '?';
+      const safeName = escJsStr(memberName);
+      if (url) {
+        return `<div class="avatar-wrap ${gClass}" onclick="openAvatarModal('${safeName}', '${gender}')" title="點擊更換 ${memberName} 的大頭貼">
+          <img class="avatar-img" src="${url}" alt="${memberName}" />
+          <span class="avatar-cam-badge">📷</span>
+        </div>`;
+      }
+      return `<div class="avatar-wrap ${gClass}" onclick="openAvatarModal('${safeName}', '${gender}')" title="點擊上傳 ${memberName} 的大頭貼">
+        <span>${initial}</span>
+        <span class="avatar-cam-badge">📷</span>
+      </div>`;
+    }
+
+    let MOBILE_WEEK_OPEN = false;
+
+    function toggleMobileWeekSelector() {
+      MOBILE_WEEK_OPEN = !MOBILE_WEEK_OPEN;
+      const card = document.getElementById('weekSelectorCard');
+      if (card) {
+        card.classList.toggle('mobile-open', MOBILE_WEEK_OPEN);
+      }
+      renderWeeklyView();
+      if (MOBILE_WEEK_OPEN) {
+        scrollActiveWeekIntoView();
+      }
+    }
+
+    function renderAll() {
+      if (!APP_DATA) return;
+      renderTopbarAndSelector();
+      renderWeekPills();
+      renderWeeklyView();
+      renderQuarterlyView();
+    }
+
+    function renderTopbarAndSelector() {
+      document.getElementById('brandTitle').textContent = '頭前混排, 週二7-9pm';
+      const r = APP_DATA.rates;
+      const lInfo = APP_DATA.layoutInfo;
+      document.getElementById('brandSub').textContent =
+        `季打 ${lInfo.memberCount} 人 (${lInfo.memberRowRange})・無冷氣 $${r.regularNoAC}/$${r.dropInNoAC}・冷氣 $${r.regularAC}/$${r.dropInAC}`;
+
+      const sel = document.getElementById('sheetSelector');
+      const sheets = APP_DATA.availableSheets || [APP_DATA.sheetTitle];
+      sel.innerHTML = sheets.map(s =>
+        `<option value="${s}" ${s === APP_DATA.sheetTitle ? 'selected' : ''}>📑 ${s}</option>`
+      ).join('');
+    }
+
+    function renderWeekPills() {
+      [0, 1, 2, 3, 4].forEach(q => {
+        const btn = document.getElementById('wqBtn' + q);
+        if (btn) {
+          btn.classList.toggle('primary', WEEKLY_QUARTER_FILTER === q);
+        }
+      });
+
+      const container = document.getElementById('weekPillsContainer');
+      const upcomingCol = findUpcomingWeekColIndex(APP_DATA.weeks);
+      const rates = APP_DATA.rates;
+      const visibleWeeks = WEEKLY_QUARTER_FILTER > 0
+        ? APP_DATA.weeks.filter(w => w.quarter === WEEKLY_QUARTER_FILTER)
+        : APP_DATA.weeks;
+
+      container.innerHTML = visibleWeeks.map(w => {
+        const isActive = w.colIndex === SELECTED_COL_INDEX;
+        const isNext = w.colIndex === upcomingCol;
+        const classes = [
+          'week-pill',
+          isActive ? 'active' : '',
+          isNext ? 'next-up' : '',
+          w.isSuspended ? 'suspended' : ''
+        ].filter(Boolean).join(' ');
+
+        let metaText = w.isSuspended
+          ? `⛔ ${w.suspendReason || '停開'}`
+          : `${w.stats.totalCount}/${rates.maxCapacity}人 (${w.stats.totalMale}男${w.stats.totalFemale}女)`;
+
+        const acIcon = w.hasAC ? '❄️' : '';
+        return `
+          <div class="${classes}" onclick="selectWeek(${w.colIndex})">
+            <div class="week-pill-date">${w.dateLabel} ${acIcon}</div>
+            <div class="week-pill-meta">${metaText}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectWeek(colIndex) {
+      SELECTED_COL_INDEX = colIndex;
+      const w = APP_DATA.weeks.find(x => x.colIndex === colIndex);
+      if (w) {
+        SELECTED_QUARTER = w.quarter;
+        if (WEEKLY_QUARTER_FILTER !== 0) WEEKLY_QUARTER_FILTER = w.quarter;
+      }
+      if (MOBILE_WEEK_OPEN) {
+        MOBILE_WEEK_OPEN = false;
+        const card = document.getElementById('weekSelectorCard');
+        if (card) card.classList.remove('mobile-open');
+      }
+      renderAll();
+    }
+
+    function renderWeeklyView() {
+      const week = APP_DATA.weeks.find(w => w.colIndex === SELECTED_COL_INDEX);
+      if (!week) return;
+
+      const s = week.stats;
+      const r = APP_DATA.rates;
+      const hero = document.getElementById('heroBanner');
+
+      let statusBadge = '';
+      if (week.isSuspended) {
+        statusBadge = `<span class="badge badge-suspend">⛔ 本週停開 (${week.suspendReason || '停開'})</span>`;
+      } else if (s.spotsLeft > 0) {
+        statusBadge = `<span class="badge badge-open">🟢 開放報名中（尚餘 ${s.spotsLeft} 名額）</span>`;
+      } else {
+        statusBadge = `<span class="badge badge-full">🟡 已滿 ${r.maxCapacity} 人（開放排候補，目前候補 ${s.waitlistCount} 人）</span>`;
+      }
+
+      const acKey = `ac-${week.colIndex}`;
+      const isAcPending = PENDING_KEYS.has(acKey);
+      const acBtnHtml = !week.isSuspended ? `
+        <button class="ac-toggle-btn ${week.hasAC ? 'active' : ''}"
+                ${isAcPending ? 'disabled' : ''}
+                onclick="handleToggleWeekAC(${week.colIndex}, ${!week.hasAC})"
+                title="點擊切換本週是否開冷氣：開啟後冷氣列填 1，且當週出席季打格子自動變橘色提醒補收 $${r.acSurcharge} 冷氣費">
+          ${isAcPending
+            ? '⏳ 寫入中...'
+            : (week.hasAC
+              ? `❄️ 今天有開冷氣 (已開啟・季打補 +$${r.acSurcharge})`
+              : `🌡️ 今天有開冷氣嗎？(點此開啟冷氣)`)}
+        </button>
+      ` : '';
+
+      const orangeBannerHtml = (week.hasAC && s.orangeACCount > 0) ? `
+        <div class="ac-orange-alert">
+          <span>🟠 本週有開冷氣！尚有 <strong>${s.orangeACCount} 位</strong> 出席季打隊員還沒補交 <strong>+$${r.acSurcharge} 冷氣費</strong>（開啟主揪收費後點選橘燈即可轉回綠燈）</span>
+        </div>
+      ` : '';
+
+      const regRate = week.hasAC ? r.regularAC : r.regularNoAC;
+      const dropRate = week.hasAC ? r.dropInAC : r.dropInNoAC;
+
+      hero.innerHTML = `
+        <div class="hero-left">
+          <div class="hero-date-row">
+            <span class="hero-date-title">${week.dateLabel} (週二)</span>
+            <button class="mobile-week-toggle-btn" onclick="toggleMobileWeekSelector()" title="點擊展開/收合其他日期選單">
+              ${MOBILE_WEEK_OPEN ? '📅 收合週次 ▴' : '📅 換週 ▾'}
+            </button>
+            ${statusBadge}
+            ${acBtnHtml}
+          </div>
+          <div class="hero-rate-info">
+            <span>💵 本週收費：<strong>季打 $${regRate} / 零打 $${dropRate}</strong> (${week.hasAC ? '含冷氣' : '無空調'})</span>
+            <span>⚖️ 參考目標：<strong>${r.targetMale}男 ${r.targetFemale}女（上限 ${r.maxCapacity} 人）</strong></span>
+          </div>
+          ${orangeBannerHtml}
+        </div>
+        <div class="hero-stats-grid">
+          <div class="stat-box highlight">
+            <div class="stat-label">目前總人數</div>
+            <div class="stat-value" style="color:var(--primary)">${s.totalCount} <span style="font-size:13px;font-weight:700;color:var(--text-muted)">/ ${r.maxCapacity}</span></div>
+            <div class="stat-sub">${s.totalMale}男 ${s.totalFemale}女</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">固定季打</div>
+            <div class="stat-value">${s.regularCount}</div>
+            <div class="stat-sub">${s.regularMale}男 ${s.regularFemale}女</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">零打正取</div>
+            <div class="stat-value">${s.dropInCount}</div>
+            <div class="stat-sub">${s.dropInMale}男 ${s.dropInFemale}女</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">尚餘名額</div>
+            <div class="stat-value" style="color:${s.spotsLeft > 0 ? 'var(--green-text)' : 'var(--wait-text)'}">${s.spotsLeft}</div>
+            <div class="stat-sub">候補 ${s.waitlistCount} 人</div>
+          </div>
+        </div>
+      `;
+
+      // Render Regular Members
+      document.getElementById('regularSummaryBadge').textContent =
+        `（出席 ${s.regularCount} 人：${s.regularMale}男 ${s.regularFemale}女）`;
+
+      const qObj = APP_DATA.quarters.find(q => q.quarter === week.quarter);
+
+      const renderMemberCard = (m) => {
+        const isAttending = m.status > 0;
+        const qMember = qObj ? qObj.members.find(qm => qm.rowIndex === m.rowIndex) : null;
+        const isBasePaid = qMember ? qMember.isQuarterBasePaid : (m.payState !== 'unpaid');
+        const safeName = escJsStr(m.name);
+
+        const toggleKey = `att-${week.colIndex}-${m.rowIndex}`;
+        const payKey = `pay-${week.colIndex}-${m.rowIndex}`;
+        const isTogglePending = PENDING_KEYS.has(toggleKey);
+        const isPayPending = PENDING_KEYS.has(payKey);
+
+        let payBtnHtml = '';
+        if (isAttending) {
+          if (isPayPending) {
+            payBtnHtml = `<button class="pay-dot-btn ${m.payState}" disabled>⏳ 寫入中...</button>`;
+          } else if (m.payState === 'owes_ac') {
+            payBtnHtml = `<button class="pay-dot-btn owes_ac"
+              onclick="handleSetMemberCellPayState(${week.colIndex}, ${m.rowIndex}, 'paid', '${safeName}')"
+              title="目前為橘色（待補冷氣費 +$${r.acSurcharge}），收到錢後點此轉為綠色已結清！">🟠 補$${r.acSurcharge}</button>`;
+          } else if (m.payState === 'paid') {
+            const nextState = week.hasAC ? 'owes_ac' : 'unpaid';
+            const tip = week.hasAC ? '已結清（綠色），點擊可改回橘色待補冷氣費' : '已繳季費（綠色），點擊可改為白色未繳';
+            payBtnHtml = `<button class="pay-dot-btn paid"
+              onclick="handleSetMemberCellPayState(${week.colIndex}, ${m.rowIndex}, '${nextState}', '${safeName}')"
+              title="${tip}">🟢 已繳</button>`;
+          } else {
+            const nextState = week.hasAC ? 'owes_ac' : 'paid';
+            payBtnHtml = `<button class="pay-dot-btn unpaid"
+              onclick="handleSetMemberCellPayState(${week.colIndex}, ${m.rowIndex}, '${nextState}', '${safeName}')"
+              title="目前為白色未繳，點擊可標記為已繳綠色">⚪ 未繳</button>`;
+          }
+        }
+
+        return `
+          <div class="member-item ${isAttending ? 'attending ' + m.payState : 'leave'}">
+            <div class="member-info">
+              ${renderAvatarHtml(m.name, m.gender)}
+              <span class="member-name" title="${m.name}">${m.name}</span>
+            </div>
+            <div class="member-actions">
+              ${payBtnHtml}
+              <button class="member-toggle-btn"
+                      ${isTogglePending ? 'disabled' : ''}
+                      onclick="handleToggleMember(${week.colIndex}, ${m.rowIndex}, ${isAttending ? 0 : 1}, ${isBasePaid}, '${safeName}', '${escJsStr(week.dateLabel)}')">
+                ${isTogglePending ? '⏳' : (isAttending ? '請假' : '出席')}
+              </button>
+            </div>
+          </div>
+        `;
+      };
+
+      const males = week.regularAttendance.filter(m => m.gender === 'M');
+      const females = week.regularAttendance.filter(m => m.gender === 'F');
+      document.getElementById('maleRegularGrid').innerHTML = males.map(renderMemberCard).join('');
+      document.getElementById('femaleRegularGrid').innerHTML = females.map(renderMemberCard).join('');
+
+      // Configure Drop-in Signup Form
+      const submitBtn = document.getElementById('submitDropInBtn');
+      const signupHint = document.getElementById('signupRuleHint');
+      const isAddPending = PENDING_KEYS.has(`add-${week.colIndex}`);
+
+      if (week.isSuspended) {
+        submitBtn.disabled = true;
+        submitBtn.className = 'submit-btn';
+        submitBtn.textContent = '⛔ 本週球館停開，暫停報名';
+      } else if (isAddPending) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '⏳ 正在寫入 Google Sheet...';
+      } else if (s.spotsLeft > 0) {
+        submitBtn.disabled = false;
+        submitBtn.className = 'submit-btn';
+        submitBtn.textContent = `➕ 立即報名零打（尚餘 ${s.spotsLeft} 名額・每人 $${dropRate}）`;
+        signupHint.textContent = `目前還有 ${s.spotsLeft} 個正取名額，送出後直接寫入 Google Sheet 並自動重算人數`;
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.className = 'submit-btn waitlist-mode';
+        submitBtn.textContent = `⏳ 登記排入候補名單（目前候補 ${s.waitlistCount} 人）`;
+        signupHint.textContent = `目前已滿 ${r.maxCapacity} 人，報名將加註 [候補]，一旦季打請假或零打取消會自動轉正！`;
+      }
+
+      // Render Confirmed Drop-ins
+      const confirmedEl = document.getElementById('confirmedDropInList');
+      if (week.dropIns.length === 0) {
+        confirmedEl.innerHTML = `<div class="empty-hint">目前尚無零打報名</div>`;
+      } else {
+        confirmedEl.innerHTML = week.dropIns.map(d => {
+          const gBadge = d.gender === 'M'
+            ? `<span style="color:var(--male-text);font-weight:800;">[男]</span>`
+            : d.gender === 'F'
+            ? `<span style="color:var(--female-text);font-weight:800;">[女]</span>`
+            : `<span style="color:var(--text-muted);font-weight:800;">[零打]</span>`;
+
+          const lampKey = `dropin-pay-${week.colIndex}-${d.rowIndex}`;
+          const delKey = `dropin-del-${week.colIndex}-${d.rowIndex}`;
+          const isLampPending = PENDING_KEYS.has(lampKey);
+          const isDelPending = PENDING_KEYS.has(delKey);
+          const safeDisplay = escJsStr(d.displayName);
+          const safeRaw = escJsStr(d.rawText);
+
+          return `
+            <div class="dropin-card ${d.isPaid ? 'paid' : ''}">
+              <div class="dropin-left">
+                ${gBadge}
+                <span class="dropin-title">${d.displayName}</span>
+                <span class="dropin-fee-tag">$${d.fee}</span>
+              </div>
+              <div class="dropin-right">
+                <button class="pay-lamp-btn ${d.isPaid ? 'paid' : ''}"
+                        ${isLampPending ? 'disabled' : ''}
+                        onclick="handleToggleDropInPaid(${week.colIndex}, ${d.rowIndex}, ${!d.isPaid}, '${safeRaw}')">
+                  <span class="lamp-dot"></span>
+                  ${isLampPending ? '⏳ 寫入中...' : (d.isPaid ? '已收費' : '點此收費')}
+                </button>
+                <button class="icon-del-btn" title="取消此筆報名"
+                        ${isDelPending ? 'disabled' : ''}
+                        onclick="handleRemoveDropIn(${week.colIndex}, ${d.rowIndex}, '${safeDisplay}', '${safeRaw}')">
+                  ${isDelPending ? '⏳' : '✕'}
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Render Waitlist
+      const waitSec = document.getElementById('waitlistSection');
+      const waitEl = document.getElementById('waitlistContainer');
+      if (week.waitlist.length === 0) {
+        waitSec.style.display = 'none';
+      } else {
+        waitSec.style.display = 'block';
+        waitEl.innerHTML = week.waitlist.map((w, idx) => {
+          const delKey = `dropin-del-${week.colIndex}-${w.rowIndex}`;
+          const isDelPending = PENDING_KEYS.has(delKey);
+          const safeDisplay = escJsStr(w.displayName);
+          const safeRaw = escJsStr(w.rawText);
+          return `
+            <div class="dropin-card waitlist">
+              <div class="dropin-left">
+                <span class="badge badge-full">候補 #${idx + 1}</span>
+                <span class="dropin-title">${w.displayName}</span>
+              </div>
+              <div class="dropin-right">
+                <button class="icon-del-btn" title="取消候補"
+                        ${isDelPending ? 'disabled' : ''}
+                        onclick="handleRemoveDropIn(${week.colIndex}, ${w.rowIndex}, '${safeDisplay}', '${safeRaw}')">
+                  ${isDelPending ? '⏳' : '✕'}
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Render Memos
+      const memoSec = document.getElementById('memoSection');
+      const memoEl = document.getElementById('memoContainer');
+      if (!week.memos || week.memos.length === 0) {
+        memoSec.style.display = 'none';
+      } else {
+        memoSec.style.display = 'block';
+        memoEl.innerHTML = week.memos.map(m => {
+          const lampKey = `dropin-pay-${week.colIndex}-${m.rowIndex}`;
+          const isLampPending = PENDING_KEYS.has(lampKey);
+          const safeRaw = escJsStr(m.rawText);
+          return `
+            <div class="dropin-card ${m.isPaid ? 'paid' : ''}">
+              <div class="dropin-left">
+                <span class="dropin-title">📌 ${m.rawText}</span>
+              </div>
+              <div class="dropin-right">
+                <button class="pay-lamp-btn ${m.isPaid ? 'paid' : ''}"
+                        ${isLampPending ? 'disabled' : ''}
+                        onclick="handleToggleDropInPaid(${week.colIndex}, ${m.rowIndex}, ${!m.isPaid}, '${safeRaw}')">
+                  <span class="lamp-dot"></span>
+                  ${isLampPending ? '⏳ 寫入中...' : (m.isPaid ? '已結清' : '標記結清')}
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    function renderQuarterlyView() {
+      const qTabs = document.getElementById('quarterTabsContainer');
+      qTabs.innerHTML = APP_DATA.quarters.map(q => {
+        const paidCount = q.members.filter(m => m.isQuarterBasePaid).length;
+        const orangeUsers = q.members.filter(m => m.orangeACCount > 0).length;
+        const subText = orangeUsers > 0
+          ? `已收 ${paidCount} 人・🟠 ${orangeUsers} 人待補冷氣`
+          : `已收季費 ${paidCount} / ${q.members.length} 人`;
+        return `
+          <button class="quarter-tab-btn ${q.quarter === SELECTED_QUARTER ? 'active' : ''}"
+                  onclick="SELECTED_QUARTER=${q.quarter}; renderQuarterlyView();">
+            <div class="quarter-tab-title">${q.label}</div>
+            <div class="quarter-tab-sub">${subText}</div>
+          </button>
+        `;
+      }).join('');
+
+      const curQ = APP_DATA.quarters.find(q => q.quarter === SELECTED_QUARTER);
+      if (!curQ) return;
+
+      document.getElementById('quarterTitle').textContent = `💰 ${curQ.label} 季打收費統計表（共 ${curQ.weekCount} 週）`;
+
+      const tbody = document.getElementById('quarterFeeTableBody');
+      tbody.innerHTML = curQ.members.map(m => {
+        const gChip = m.gender === 'M'
+          ? `<span style="color:var(--male-text);font-weight:800;">男</span>`
+          : `<span style="color:var(--female-text);font-weight:800;">女</span>`;
+
+        const rowClass = m.orangeACCount > 0 ? 'orange-row' : (m.isQuarterBasePaid ? 'paid-row' : '');
+        const qKey = `qpay-${curQ.quarter}-${m.rowIndex}`;
+        const isQPending = PENDING_KEYS.has(qKey);
+        const safeName = escJsStr(m.name);
+
+        return `
+          <tr class="${rowClass}">
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                ${renderAvatarHtml(m.name, m.gender)}
+                <span style="font-weight:800;">${m.name}</span>
+              </div>
+            </td>
+            <td>${gChip}</td>
+            <td><strong>${m.attendedCount}</strong> 場 <span style="color:var(--text-muted);font-size:12px;">(冷氣 ${m.acAttendedCount} 場)</span></td>
+            <td style="font-weight:800;">$${m.totalBaseFee.toLocaleString()}</td>
+            <td>
+              ${m.orangeACCount > 0
+                ? `<span class="badge badge-full">🟠 待補 $${m.owedACFee} (${m.orangeACCount}場)</span>`
+                : `<span style="color:var(--text-dim);font-size:12px;">無欠費</span>`}
+            </td>
+            <td>
+              <span style="color:var(--green-text);font-weight:700;">🟢${m.paidGreenCount}</span> /
+              <span style="color:var(--orange-text);font-weight:700;">🟠${m.orangeACCount}</span> /
+              <span style="color:var(--text-muted);">⚪${m.unpaidWhiteCount}</span>
+            </td>
+            <td>
+              <button class="pay-lamp-btn ${m.isQuarterBasePaid ? 'paid' : ''}"
+                      ${isQPending ? 'disabled' : ''}
+                      onclick="handleToggleQuarterPaid(${curQ.quarter}, ${m.rowIndex}, ${!m.isQuarterBasePaid}, '${safeName}')">
+                <span class="lamp-dot"></span>
+                ${isQPending ? '⏳ 寫入中...' : (m.isQuarterBasePaid ? '整季已收費 (綠燈)' : '點此標記整季已收')}
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // ==================== Fast Single-Column Actions (True Backend Confirmation) ====================
+
+    async function handleToggleMember(colIndex, rowIndex, newStatus, isBasePaid, memberName, dateLabel) {
+      const actionDesc = newStatus > 0
+        ? `確定要將「${memberName}」在 ${dateLabel || '本週'} 改為【出席】嗎？`
+        : `確定要幫「${memberName}」在 ${dateLabel || '本週'} 登記【請假】嗎？\n（請假後將釋出名額給零打或候補）`;
+      if (!confirm(actionDesc)) return;
+
+      const key = `att-${colIndex}-${rowIndex}`;
+      if (PENDING_KEYS.has(key)) return;
+      PENDING_KEYS.add(key);
+      renderWeeklyView();
+
+      try {
+        const res = await callBackend('toggleMemberAttendance', {
+          sheetName: CURRENT_SHEET_NAME,
+          layout: APP_DATA.layout,
+          colIndex,
+          rowIndex,
+          newStatus,
+          isBasePaid
+        });
+        PENDING_KEYS.delete(key);
+        applySingleWeekUpdate(res.updatedWeek);
+        showToast(newStatus > 0 ? `✅ 已將「${memberName}」標記為出席` : `📝 已將「${memberName}」登記請假（名額已釋出）`);
+      } catch (err) {
+        PENDING_KEYS.delete(key);
+        renderWeeklyView();
+        alert(err.message);
+      }
+    }
+
+    async function handleSetMemberCellPayState(colIndex, rowIndex, targetState, memberName) {
+      if (!requireOrganizerMode()) return;
+      const key = `pay-${colIndex}-${rowIndex}`;
+      if (PENDING_KEYS.has(key)) return;
+      PENDING_KEYS.add(key);
+      renderWeeklyView();
+
+      try {
+        const res = await callBackend('setMemberCellPayState', {
+          sheetName: CURRENT_SHEET_NAME,
+          layout: APP_DATA.layout,
+          colIndex,
+          rowIndex,
+          targetState
+        });
+        PENDING_KEYS.delete(key);
+        applySingleWeekUpdate(res.updatedWeek);
+        const label = targetState === 'paid' ? '🟢 已繳清（綠格）' : (targetState === 'owes_ac' ? '🟠 待補冷氣費（橘格）' : '⚪ 未繳（白格）');
+        showToast(`${memberName} 狀態已確認更新為：${label}`);
+      } catch (err) {
+        PENDING_KEYS.delete(key);
+        renderWeeklyView();
+        alert('更新繳費燈號失敗：' + err.message);
+      }
+    }
+
+    async function handleToggleWeekAC(colIndex, hasAC) {
+      if (!requireOrganizerMode()) return;
+      const key = `ac-${colIndex}`;
+      if (PENDING_KEYS.has(key)) return;
+      PENDING_KEYS.add(key);
+      renderWeeklyView();
+
+      try {
+        const res = await callBackend('toggleWeekAC', {
+          sheetName: CURRENT_SHEET_NAME,
+          layout: APP_DATA.layout,
+          colIndex,
+          hasAC
+        });
+        PENDING_KEYS.delete(key);
+        applySingleWeekUpdate(res.updatedWeek);
+        showToast(hasAC
+          ? `❄️ 已開啟本週冷氣！所有出席季打已轉為「🟠橘色待補冷氣費」`
+          : `🌡️ 已關閉本週冷氣，橘色格子已恢復為綠色`);
+      } catch (err) {
+        PENDING_KEYS.delete(key);
+        renderWeeklyView();
+        alert('切換冷氣狀態失敗：' + err.message);
+      }
+    }
+
+    async function handleAddDropIn(e) {
+      e.preventDefault();
+      const nameInput = document.getElementById('inputDropInName');
+      const name = nameInput.value.trim();
+      const gender = document.getElementById('inputDropInGender').value;
+      const count = parseInt(document.getElementById('inputDropInCount').value, 10);
+      if (!name) return;
+
+      const key = `add-${SELECTED_COL_INDEX}`;
+      if (PENDING_KEYS.has(key)) return;
+      PENDING_KEYS.add(key);
+      renderWeeklyView();
+
+      try {
+        const res = await callBackend('addDropIn', {
+          sheetName: CURRENT_SHEET_NAME,
+          layout: APP_DATA.layout,
+          colIndex: SELECTED_COL_INDEX,
+          name,
+          gender,
+          count
+        });
+        PENDING_KEYS.delete(key);
+        nameInput.value = '';
+        applySingleWeekUpdate(res.updatedWeek);
+        showToast(`🏐 報名成功！已確認寫入 Google Sheet`);
+      } catch (err) {
+        PENDING_KEYS.delete(key);
+        renderWeeklyView();
+        alert('報名失敗：' + err.message);
+      }
+    }
+
+    async function handleRemoveDropIn(colIndex, rowIndex, displayName, expectedText) {
+      if (!confirm(`確定要取消「${displayName}」的報名嗎？\n（取消後若有候補名單，系統會自動遞補！）`)) return;
+      const key = `dropin-del-${colIndex}-${rowIndex}`;
+      if (PENDING_KEYS.has(key)) return;
+      PENDING_KEYS.add(key);
+      renderWeeklyView();
+
+      try {
+        const res = await callBackend('removeDropIn', {
+          sheetName: CURRENT_SHEET_NAME,
+          layout: APP_DATA.layout,
+          colIndex,
+          rowIndex,
+          expectedText: expectedText || ''
+        });
+        PENDING_KEYS.delete(key);
+        applySingleWeekUpdate(res.updatedWeek);
+        showToast(`🗑️ 已取消「${displayName}」並完成名額重算`);
+      } catch (err) {
+        PENDING_KEYS.delete(key);
+        renderWeeklyView();
+        alert('取消失敗：' + err.message);
+      }
+    }
+
+    async function handleToggleDropInPaid(colIndex, rowIndex, isPaid, expectedText) {
+      if (!requireOrganizerMode()) return;
+      const key = `dropin-pay-${colIndex}-${rowIndex}`;
+      if (PENDING_KEYS.has(key)) return;
+      PENDING_KEYS.add(key);
+      renderWeeklyView();
+
+      try {
+        const res = await callBackend('toggleDropInPaid', {
+          sheetName: CURRENT_SHEET_NAME,
+          layout: APP_DATA.layout,
+          colIndex,
+          rowIndex,
+          isPaid,
+          expectedText: expectedText || ''
+        });
+        PENDING_KEYS.delete(key);
+        applySingleWeekUpdate(res.updatedWeek);
+        showToast(isPaid ? '🟢 已確認亮綠燈！Google Sheet 儲存格已同步反綠' : '⚪ 已改回未繳費狀態');
+      } catch (err) {
+        PENDING_KEYS.delete(key);
+        renderWeeklyView();
+        alert('更新繳費狀態失敗：' + err.message);
+      }
+    }
+
+    async function handleToggleQuarterPaid(quarter, rowIndex, isPaid, memberName) {
+      if (!requireOrganizerMode()) return;
+      const key = `qpay-${quarter}-${rowIndex}`;
+      if (PENDING_KEYS.has(key)) return;
+      PENDING_KEYS.add(key);
+      renderQuarterlyView();
+
+      try {
+        const res = await callBackend('toggleQuarterPaid', {
+          sheetName: CURRENT_SHEET_NAME,
+          layout: APP_DATA.layout,
+          quarter,
+          rowIndex,
+          isPaid
+        });
+        PENDING_KEYS.delete(key);
+        applyQuarterMemberUpdate(res.updatedQuarterMember);
+        showToast(isPaid ? `🟢 已將「${memberName}」Q${quarter} 整季標記為已繳費` : `⚪ 已將「${memberName}」Q${quarter} 改為未繳費`);
+      } catch (err) {
+        PENDING_KEYS.delete(key);
+        renderQuarterlyView();
+        alert('更新整季繳費失敗：' + err.message);
+      }
+    }
+
+    // ==================== Regular Member Avatar Upload & Canvas Compression ====================
+
+    function openAvatarModal(memberName, gender) {
+      AVATAR_TARGET_MEMBER = { name: memberName, gender: gender };
+      const existingUrl = (APP_DATA && APP_DATA.avatars && APP_DATA.avatars[memberName]) || '';
+      PENDING_AVATAR_DATA_URL = existingUrl;
+
+      document.getElementById('avatarModalTitle').textContent = `更換「${memberName}」的大頭貼`;
+      document.getElementById('avatarFileInput').value = '';
+      document.getElementById('avatarSaveBtn').disabled = true;
+      document.getElementById('avatarRemoveBtn').style.display = existingUrl ? 'inline-block' : 'none';
+
+      renderAvatarModalPreview(existingUrl, memberName);
+      document.getElementById('avatarModalBackdrop').classList.add('show');
+    }
+
+    function closeAvatarModal() {
+      document.getElementById('avatarModalBackdrop').classList.remove('show');
+      AVATAR_TARGET_MEMBER = null;
+      PENDING_AVATAR_DATA_URL = '';
+    }
+
+    function renderAvatarModalPreview(dataUrl, memberName) {
+      const box = document.getElementById('avatarModalPreview');
+      if (dataUrl) {
+        box.innerHTML = `<img src="${dataUrl}" alt="${memberName}" />`;
+      } else {
+        box.innerHTML = `<span>${memberName ? memberName.slice(0, 1) : '?'}</span>`;
+      }
+    }
+
+    function handleAvatarFileChange(e) {
+      const file = e.target.files && e.target.files[0];
+      if (!file || !AVATAR_TARGET_MEMBER) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const img = new Image();
+        img.onload = function() {
+          // Center-crop to 96x96 square and compress as JPEG 0.78 (~3-5KB DataURL)
+          const canvas = document.createElement('canvas');
+          const size = 96;
+          canvas.width = size;
+          canvas.height = size;
+          const ctx = canvas.getContext('2d');
+
+          const minSide = Math.min(img.width, img.height);
+          const sx = (img.width - minSide) / 2;
+          const sy = (img.height - minSide) / 2;
+
+          ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, size, size);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.78);
+
+          PENDING_AVATAR_DATA_URL = compressedDataUrl;
+          renderAvatarModalPreview(compressedDataUrl, AVATAR_TARGET_MEMBER.name);
+          document.getElementById('avatarSaveBtn').disabled = false;
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function saveAvatarToBackend(dataUrl) {
+      if (!AVATAR_TARGET_MEMBER) return;
+      const memberName = AVATAR_TARGET_MEMBER.name;
+      const saveBtn = document.getElementById('avatarSaveBtn');
+      const origText = saveBtn.textContent;
+      saveBtn.disabled = true;
+      saveBtn.textContent = '⏳ 正在寫入...';
+
+      try {
+        const res = await callBackend('saveMemberAvatar', {
+          memberName: memberName,
+          avatarDataUrl: dataUrl || ''
+        });
+        APP_DATA.avatars = APP_DATA.avatars || {};
+        if (res.avatarDataUrl) {
+          APP_DATA.avatars[memberName] = res.avatarDataUrl;
+        } else {
+          delete APP_DATA.avatars[memberName];
+        }
+        closeAvatarModal();
+        renderAll();
+        showToast(res.avatarDataUrl ? `📸 已更新「${memberName}」的大頭貼！` : `🗑️ 已移除「${memberName}」的大頭貼`);
+      } catch (err) {
+        alert('儲存大頭貼失敗：' + err.message);
+      } finally {
+        saveBtn.textContent = origText;
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      refreshData(false).then(() => scrollActiveWeekIntoView());
+    });
+  </script>
+</body>
+</html>

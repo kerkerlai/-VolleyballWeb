@@ -1,0 +1,24 @@
+{
+  "name": "球Volleyball-頭前混排(7-9pm)",
+  "short_name": "頭前混排",
+  "description": "頭前混排 Play (週二 7-9pm) 單週報名、候補遞補與季打收費管理",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0B0F17",
+  "theme_color": "#0B0F17",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icon-512.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
